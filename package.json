@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/cli": "^8.0.2",
+    "@capacitor/core": "^8.0.2",
+    "@capacitor/ios": "^8.0.2",
     "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.33.0",
     "react": "^19.2.0",

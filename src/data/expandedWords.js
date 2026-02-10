@@ -150,5 +150,20 @@ export const EXPANDED_WORDS = [
     { word: '케이크', vowel: 'ㅔ', char: '케', consonant: 'ㅋ' },
     { word: '테니스', vowel: 'ㅔ', char: '테', consonant: 'ㅌ' },
     { word: '페인트', vowel: 'ㅔ', char: '페', consonant: 'ㅍ' },
-    { word: '헤어', vowel: 'ㅔ', char: '헤', consonant: 'ㅎ' }
+    { word: '헤어', vowel: 'ㅔ', char: '헤', consonant: 'ㅎ' },
+
+    // New Additions (Game Content Update)
+    { word: '가위', vowel: 'ㅏ', char: '가', consonant: 'ㄱ' },
+    { word: '나팔', vowel: 'ㅏ', char: '나', consonant: 'ㄴ' },
+    { word: '마법사', vowel: 'ㅏ', char: '마', consonant: 'ㅁ' },
+    { word: '바다', vowel: 'ㅏ', char: '바', consonant: 'ㅂ' },
+    { word: '사탕', vowel: 'ㅏ', char: '사', consonant: 'ㅅ' },
+    { word: '아빠', vowel: 'ㅏ', char: '아', consonant: 'ㅇ' },
+    { word: '이마', vowel: 'ㅣ', char: '이', consonant: 'ㅇ' },
+    { word: '지도', vowel: 'ㅣ', char: '지', consonant: 'ㅈ' },
+    { word: '타이어', vowel: 'ㅏ', char: '타', consonant: 'ㅌ' },
+    { word: '파도', vowel: 'ㅏ', char: '파', consonant: 'ㅍ' },
+    { word: '고래', vowel: 'ㅗ', char: '고', consonant: 'ㄱ' },
+    { word: '구름', vowel: 'ㅜ', char: '구', consonant: 'ㄱ' },
+    { word: '개구리', vowel: 'ㅐ', char: '개', consonant: 'ㄱ' }
 ];

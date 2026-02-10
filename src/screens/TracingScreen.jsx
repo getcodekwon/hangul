@@ -58,22 +58,42 @@ const TracingScreen = () => {
         ctx.strokeStyle = color;
     }, [color]);
 
+    const handleNext = () => {
+        const CHARS = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ',
+            'ㅏ', 'ㅑ', 'ㅓ', 'ㅕ', 'ㅗ', 'ㅛ', 'ㅜ', 'ㅠ', 'ㅡ', 'ㅣ'];
+        let nextChar = id;
+        while (nextChar === id) {
+            nextChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+        navigate(`/tracing/${nextChar}`);
+    };
+
     const drawGuide = (ctx, char) => {
         ctx.save();
-        ctx.font = 'bold 400px "Gamja Flower", cursive';
-        ctx.fillStyle = '#EEEEEE'; // Very light gray
+        // Dynamic font sizing based on canvas width
+        const fontSize = Math.min(ctx.canvas.width, ctx.canvas.height) * 0.8;
+        ctx.font = `bold ${fontSize}px "Gamja Flower", cursive`;
+
+        // Fill - Lighter and softer
+        ctx.fillStyle = 'rgba(230, 230, 230, 0.5)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        // Dashed outline effect
-        ctx.setLineDash([10, 10]);
+
+        // Dashed outline - more visible guide
+        ctx.setLineDash([15, 15]);
         ctx.lineWidth = 4;
-        ctx.strokeStyle = '#CCCCCC';
+        ctx.strokeStyle = '#BBBBBB';
 
         const x = ctx.canvas.width / 2;
         const y = ctx.canvas.height / 2;
 
-        ctx.fillText(char, x, y);
-        ctx.strokeText(char, x, y);
+        // Adjust Y for text baseline centering
+        const textMetrics = ctx.measureText(char);
+        const actualHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+        const yOffset = textMetrics.actualBoundingBoxAscent / 2 - actualHeight / 2;
+
+        ctx.fillText(char, x, y + actualHeight / 4); // Slight adjustment for visual center
+        ctx.strokeText(char, x, y + actualHeight / 4);
         ctx.restore();
     };
 
@@ -152,7 +172,11 @@ const TracingScreen = () => {
         frame();
         setShowSuccess(true);
         setTimeout(() => {
-            navigate('/select/tracing');
+            setShowSuccess(false); // Hide success overlay
+            // Optional: Auto-next or just stay? 
+            // Let's just stay for now or maybe clear? 
+            // User might want to admire it. 
+            // The original code navigated back. Let's JUST hide success so they can click Next.
         }, 3000);
     };
 
@@ -160,9 +184,9 @@ const TracingScreen = () => {
         <div style={styles.container}>
             {/* Header */}
             <div style={styles.header}>
-                <button onClick={() => navigate('/select/tracing')} style={styles.backButton}>이전으로</button>
-                <h1 style={styles.title}>따라 써보세요: {id}</h1>
-                <div style={{ width: 100 }}></div> {/* Spacer */}
+                <button onClick={() => navigate('/select/tracing')} style={styles.backButton}>나가기</button>
+                <h1 style={styles.title}>{id}</h1>
+                <button onClick={handleNext} style={styles.nextButton}>다음 글자 ▶</button>
             </div>
 
             {/* Canvas Area */}
@@ -261,6 +285,18 @@ const styles = {
         cursor: 'pointer',
         boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
         fontFamily: '"Gamja Flower", cursive',
+    },
+    nextButton: {
+        padding: '10px 20px',
+        fontSize: '1.2rem',
+        borderRadius: '15px',
+        border: 'none',
+        background: '#FF9800',
+        color: 'white',
+        cursor: 'pointer',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+        fontFamily: '"Gamja Flower", cursive',
+        fontWeight: 'bold',
     },
     title: {
         fontSize: '3rem',
