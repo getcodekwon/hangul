@@ -147,13 +147,13 @@ const styles = {
         padding: '20px',
     },
     button: {
-        width: '100%',
+        width: '85%', // Reduced size
         aspectRatio: '1', // Make buttons square
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         padding: '1rem',
-        fontSize: '1.8rem',
+        fontSize: '1.6rem', // Slightly smaller font to match
         borderRadius: '30px',
         border: 'none',
         color: 'white',
