@@ -65,6 +65,14 @@ export function GameModeSelection() {
                     onClick={() => navigate('/game/quiz/0')}
                     delay={0.5}
                 />
+
+                {/* 6. Memory Match Game */}
+                <MenuButton
+                    color="#90CAF9" // Blue (Pastel)
+                    label="단어 그림 짝꿍"
+                    onClick={() => navigate('/game/memory')}
+                    delay={0.6}
+                />
             </div>
         </div>
     );
