@@ -49,6 +49,22 @@ export function GameModeSelection() {
                     onClick={() => navigate('/select/tracing')}
                     delay={0.3}
                 />
+
+                {/* 4. Word Train Game */}
+                <MenuButton
+                    color="#A8D5BA" // Green (Pastel)
+                    label="칙칙폭폭 낱말 기차"
+                    onClick={() => navigate('/game/train/0')}
+                    delay={0.4}
+                />
+
+                {/* 5. Initial Sound Quiz */}
+                <MenuButton
+                    color="#B39DDB" // Purple (Pastel)
+                    label="초성 퀴즈"
+                    onClick={() => navigate('/game/quiz/0')}
+                    delay={0.5}
+                />
             </div>
         </div>
     );
