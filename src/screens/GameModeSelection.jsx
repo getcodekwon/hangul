@@ -138,22 +138,29 @@ const styles = {
         marginBottom: '3rem',
     },
     menuContainer: {
-        display: 'flex',
-        flexDirection: 'column',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '2rem',
-        width: '100%',
-        maxWidth: '500px',
-        alignItems: 'center',
+        width: '90%',
+        maxWidth: '1000px',
+        margin: '0 auto',
+        padding: '20px',
     },
     button: {
         width: '100%',
-        padding: '1.5rem',
-        fontSize: '2rem',
+        aspectRatio: '1', // Make buttons square
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '1rem',
+        fontSize: '1.8rem',
         borderRadius: '30px',
         border: 'none',
         color: 'white',
         fontFamily: '"Jua", sans-serif',
         cursor: 'pointer',
         textAlign: 'center',
+        wordBreak: 'keep-all', // Prevent awkward word breaks
+        lineHeight: '1.3',
     }
 };
