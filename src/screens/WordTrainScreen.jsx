@@ -4,18 +4,13 @@ import { motion, Reorder } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 // Simple data for initial version
-const WORD_DATA = [
-    { id: 0, word: "바나나", image: "🍌" },
-    { id: 1, word: "사자", image: "🦁" },
-    { id: 2, word: "자동차", image: "🚗" },
-    { id: 3, word: "우산", image: "☂️" },
-];
+import { WORDS } from '../data/wordData';
 
 export function WordTrainScreen() {
     const navigate = useNavigate();
     const { id } = useParams();
     const currentLevelIndex = parseInt(id) || 0;
-    const currentData = WORD_DATA[currentLevelIndex % WORD_DATA.length];
+    const currentData = WORDS[currentLevelIndex % WORDS.length];
 
     const [items, setItems] = useState([]);
     const [isComplete, setIsComplete] = useState(false);

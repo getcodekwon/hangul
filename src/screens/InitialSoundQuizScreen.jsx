@@ -3,18 +3,29 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
-const QUIZ_DATA = [
-    { id: 0, word: "사자", initial: "ㅅ", image: "🦁", options: ["ㄱ", "ㅅ", "ㄷ", "ㄹ"] },
-    { id: 1, word: "바나나", initial: "ㅂ", image: "🍌", options: ["ㅂ", "ㄴ", "ㅇ", "ㅈ"] },
-    { id: 2, word: "토끼", initial: "ㅌ", image: "🐰", options: ["ㅌ", "ㅋ", "ㅍ", "ㅎ"] },
-    { id: 3, word: "오리", initial: "ㅇ", image: "🦆", options: ["ㅇ", "ㅁ", "ㅂ", "ㅅ"] },
-];
+import { WORDS } from '../data/wordData';
+
+// Helper to get random incorrect initials
+const getRandomInitials = (correctInitial, count = 3) => {
+    const initials = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
+    const options = [correctInitial];
+    while (options.length < count + 1) {
+        const randomInitial = initials[Math.floor(Math.random() * initials.length)];
+        if (!options.includes(randomInitial)) {
+            options.push(randomInitial);
+        }
+    }
+    return options.sort(() => Math.random() - 0.5);
+};
 
 export function InitialSoundQuizScreen() {
     const navigate = useNavigate();
     const { id } = useParams();
     const currentQuestionIndex = parseInt(id) || 0;
-    const currentData = QUIZ_DATA[currentQuestionIndex % QUIZ_DATA.length];
+    const currentData = WORDS[currentQuestionIndex % WORDS.length];
+
+    // Memoize options so they don't change on re-renders (unless question changes)
+    const options = React.useMemo(() => getRandomInitials(currentData.initial), [currentData.id]);
 
     const [isWrong, setIsWrong] = useState(false);
 
@@ -65,7 +76,7 @@ export function InitialSoundQuizScreen() {
 
             {/* Options Area */}
             <div style={styles.optionsContainer}>
-                {currentData.options.map((option, index) => (
+                {options.map((option, index) => (
                     <motion.button
                         key={index}
                         whileHover={{ scale: 1.1 }}
