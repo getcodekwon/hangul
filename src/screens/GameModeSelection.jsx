@@ -157,18 +157,23 @@ const styles = {
         cursor: 'pointer',
     },
     title: {
-        fontSize: '3.5rem',
+        fontSize: '3rem',
         color: '#555',
-        marginBottom: '3rem',
+        marginBottom: '1.5rem', // Reduced from 3rem
     },
     menuContainer: {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '2rem',
-        width: '90%',
+        gap: '1rem', // Reduced from 2rem
+        width: '95%', // Increased from 90%
         maxWidth: '1000px',
         margin: '0 auto',
-        padding: '20px',
+        padding: '10px', // Reduced from 20px
+        alignItems: 'center',
+        justifyItems: 'center',
+        // Add max-height to ensure it fits or scrolls if absolutely necessary
+        maxHeight: '85vh',
+        overflowY: 'auto',
     },
     button: {
         width: '85%', // Reduced size
