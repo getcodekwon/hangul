@@ -73,6 +73,22 @@ export function GameModeSelection() {
                     onClick={() => navigate('/game/memory')}
                     delay={0.6}
                 />
+
+                {/* 7. Connect Word Game */}
+                <MenuButton
+                    color="#FFAB91" // Deep Orange (Pastel)
+                    label="단어 잇기"
+                    onClick={() => navigate('/game/connect')}
+                    delay={0.7}
+                />
+
+                {/* 8. Whack-a-Mole Game */}
+                <MenuButton
+                    color="#D7CCC8" // Brown (Pastel)
+                    label="두더지 잡기"
+                    onClick={() => navigate('/game/mole')}
+                    delay={0.8}
+                />
             </div>
         </div>
     );

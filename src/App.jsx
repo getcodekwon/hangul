@@ -8,6 +8,8 @@ import { TracingScreen } from './screens/TracingScreen';
 import { WordTrainScreen } from './screens/WordTrainScreen';
 import { InitialSoundQuizScreen } from './screens/InitialSoundQuizScreen';
 import { MemoryMatchScreen } from './screens/MemoryMatchScreen';
+import { ConnectWordScreen } from './screens/ConnectWordScreen';
+import { WhackAMoleScreen } from './screens/WhackAMoleScreen';
 import './App.css';
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path="/game/train/:id" element={<WordTrainScreen />} />
         <Route path="/game/quiz/:id" element={<InitialSoundQuizScreen />} />
         <Route path="/game/memory" element={<MemoryMatchScreen />} />
+        <Route path="/game/connect" element={<ConnectWordScreen />} />
+        <Route path="/game/mole" element={<WhackAMoleScreen />} />
         {/* Redirect legacy routes if any */}
         <Route path="/select" element={<Navigate to="/select/vowel" replace />} />
       </Routes>
