@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { EXPANDED_WORDS } from '../data/expandedWords';
 import { CONSONANTS, combineHangul } from '../data/vowels';
+import { GameHeader } from '../components/GameHeader';
 
 export function GameScreen() {
     const { mode, id } = useParams(); // mode: 'vowel' | 'consonant', id: char (e.g. 'ㅏ' or 'ㄱ')
@@ -236,7 +237,8 @@ export function GameScreen() {
     return (
         <div style={styles.container}>
             {/* Navigation Buttons */}
-            <div style={styles.navContainer}>
+            {/* Navigation Buttons */}
+            <GameHeader>
                 <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -245,15 +247,7 @@ export function GameScreen() {
                 >
                     다른 글자
                 </motion.button>
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => navigate('/mode-select')}
-                    style={styles.navButton}
-                >
-                    게임 선택
-                </motion.button>
-            </div>
+            </GameHeader>
 
             {phase === 'compose' && targetWord && (
                 <CompositionView
@@ -440,14 +434,7 @@ const styles = {
         fontFamily: '"Jua", sans-serif',
         position: 'relative',
     },
-    navContainer: {
-        position: 'absolute',
-        top: '1.5rem',
-        right: '1.5rem',
-        display: 'flex',
-        gap: '1rem',
-        zIndex: 100, // Ensure buttons are above game composition/quiz
-    },
+    // navContainer removed (used in GameHeader)
     navButton: {
         padding: '0.8rem 1.2rem',
         fontSize: '1.2rem',

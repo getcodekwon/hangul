@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { GameHeader } from '../components/GameHeader';
 import confetti from 'canvas-confetti';
 
 import { WORDS } from '../data/wordData';
@@ -49,19 +50,11 @@ export function InitialSoundQuizScreen() {
     return (
         <div style={styles.container}>
             {/* Header */}
-            <div style={styles.header}>
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => navigate('/mode-select')}
-                    style={styles.homeButton}
-                >
-                    🏠
-                </motion.button>
+            <GameHeader>
                 <div style={styles.progress}>
                     문제 {currentQuestionIndex + 1}
                 </div>
-            </div>
+            </GameHeader>
 
             <h2 style={styles.question}>이 그림의 첫 소리는 무엇일까요?</h2>
 
@@ -108,24 +101,19 @@ const styles = {
         backgroundColor: '#F3E5F5', // Light Purple background
         fontFamily: '"Jua", sans-serif',
     },
-    header: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '20px',
-    },
-    homeButton: {
-        background: 'none',
-        border: 'none',
-        fontSize: '2rem',
-        cursor: 'pointer',
-    },
+    // header removed
+    // homeButton removed
     progress: {
         fontSize: '1.5rem',
         color: '#5E35B1',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        padding: '5px 15px',
+        borderRadius: '10px',
+        display: 'flex',
+        alignItems: 'center',
     },
     question: {
+        marginTop: '60px', // Add margin for absolute header
         color: '#512DA8',
         marginBottom: '30px',
         fontSize: '2rem',

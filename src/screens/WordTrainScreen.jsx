@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, Reorder } from 'framer-motion';
+import { GameHeader } from '../components/GameHeader';
 import confetti from 'canvas-confetti';
 
 // Simple data for initial version
@@ -45,19 +46,11 @@ export function WordTrainScreen() {
     return (
         <div style={styles.container}>
             {/* Header */}
-            <div style={styles.header}>
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => navigate('/mode-select')}
-                    style={styles.homeButton}
-                >
-                    🏠
-                </motion.button>
+            <GameHeader>
                 <div style={styles.progress}>
                     문제 {currentLevelIndex + 1}
                 </div>
-            </div>
+            </GameHeader>
 
             {/* Image Area */}
             <motion.div
@@ -115,24 +108,19 @@ const styles = {
         backgroundColor: '#E0F7FA', // Light Cyan background
         fontFamily: '"Jua", sans-serif',
     },
-    header: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '20px',
-    },
-    homeButton: {
-        background: 'none',
-        border: 'none',
-        fontSize: '2rem',
-        cursor: 'pointer',
-    },
+    // header removed
+    // homeButton removed
     progress: {
         fontSize: '1.5rem',
         color: '#006064',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        padding: '5px 15px',
+        borderRadius: '10px',
+        display: 'flex', // Ensure alignment in GameHeader
+        alignItems: 'center',
     },
     imageContainer: {
+        marginTop: '60px', // Add margin since header is absolute
         backgroundColor: 'white',
         borderRadius: '50%',
         width: '200px',

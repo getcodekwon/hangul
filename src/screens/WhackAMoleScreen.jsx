@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GameHeader } from '../components/GameHeader';
 import confetti from 'canvas-confetti';
 import { WORDS } from '../data/wordData';
 
@@ -147,6 +148,7 @@ export function WhackAMoleScreen() {
     return (
         <div style={styles.container}>
             {/* Header */}
+            <GameHeader />
             <div style={styles.header}>
                 <div style={styles.infoBox}>
                     <span style={styles.label}>점수</span>
@@ -246,6 +248,7 @@ const styles = {
         overflow: 'hidden',
     },
     header: {
+        marginTop: '50px', // Push down score/target board
         width: '100%',
         maxWidth: '600px',
         display: 'flex',

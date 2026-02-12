@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GameHeader } from '../components/GameHeader';
 import confetti from 'canvas-confetti';
 
 const colors = [
@@ -182,12 +183,28 @@ const TracingScreen = () => {
 
     return (
         <div style={styles.container}>
-            {/* Header */}
-            <div style={styles.header}>
-                <button onClick={() => navigate('/select/tracing')} style={styles.backButton}>나가기</button>
-                <h1 style={styles.title}>{id}</h1>
-                <button onClick={handleNext} style={styles.nextButton}>다음 글자 ▶</button>
-            </div>
+            {/* Top Navigation */}
+            <GameHeader>
+                <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => navigate('/select/tracing')}
+                    style={styles.navButton}
+                >
+                    다른 글자
+                </motion.button>
+                <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleNext}
+                    style={{ ...styles.navButton, background: '#FF9800', color: 'white', border: 'none' }}
+                >
+                    다음 글자 ▶
+                </motion.button>
+            </GameHeader>
+
+            {/* Title (Floating or specific placement) */}
+            <h1 style={styles.floatingTitle}>{id}</h1>
 
             {/* Canvas Area */}
             <div style={styles.canvasContainer}>
@@ -239,6 +256,17 @@ const TracingScreen = () => {
                         다 썼어요!
                     </motion.button>
                 </div>
+                {/* Navigation Buttons */}
+                <GameHeader>
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => navigate(`/select/tracing`)}
+                        style={styles.navButton}
+                    >
+                        다른 글자
+                    </motion.button>
+                </GameHeader>
             </div>
 
             <AnimatePresence>
@@ -269,40 +297,26 @@ const styles = {
         boxSizing: 'border-box',
         overflow: 'hidden',
     },
-    header: {
-        width: '100%',
+    navButton: {
+        padding: '0.8rem 1.2rem',
+        fontSize: '1.2rem',
+        borderRadius: '15px',
+        border: '3px solid #ccc',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        color: '#555',
+        fontFamily: '"Jua", sans-serif',
+        cursor: 'pointer',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '20px',
+        justifyContent: 'center',
     },
-    backButton: {
-        padding: '10px 20px',
-        fontSize: '1.2rem',
-        borderRadius: '15px',
-        border: 'none',
-        background: 'white',
-        cursor: 'pointer',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        fontFamily: '"Gamja Flower", cursive',
-    },
-    nextButton: {
-        padding: '10px 20px',
-        fontSize: '1.2rem',
-        borderRadius: '15px',
-        border: 'none',
-        background: '#FF9800',
-        color: 'white',
-        cursor: 'pointer',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        fontFamily: '"Gamja Flower", cursive',
-        fontWeight: 'bold',
-    },
-    title: {
+    floatingTitle: {
         fontSize: '3rem',
         color: '#333',
-        margin: 0,
+        margin: '0 0 20px 0',
         fontFamily: '"Gamja Flower", cursive',
+        // Optional: Absolute pos if needed, but flex flow is likely fine
     },
     canvasContainer: {
         flex: 1,

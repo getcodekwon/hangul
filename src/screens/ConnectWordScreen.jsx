@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GameHeader } from '../components/GameHeader';
 import confetti from 'canvas-confetti';
 import { WORDS } from '../data/wordData';
 
@@ -76,18 +77,9 @@ export function ConnectWordScreen() {
     return (
         <div style={styles.container}>
             {/* Header */}
-            <div style={styles.header}>
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => navigate('/mode-select')}
-                    style={styles.homeButton}
-                >
-                    🏠
-                </motion.button>
-                <div style={styles.title}>
-                    단어 잇기
-                </div>
+            <GameHeader />
+            <div style={styles.title}>
+                단어 잇기
             </div>
 
             <h2 style={styles.instruction}>그림과 단어를 연결해보세요!</h2>
@@ -178,23 +170,14 @@ const styles = {
         fontFamily: '"Jua", sans-serif',
         position: 'relative',
     },
-    header: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '10px',
-        maxWidth: '600px',
-    },
-    homeButton: {
-        background: 'none',
-        border: 'none',
-        fontSize: '2rem',
-        cursor: 'pointer',
-    },
+    // header removed
+    // homeButton removed
     title: {
-        fontSize: '1.8rem',
+        marginTop: '50px',
+        fontSize: '2rem',
         color: '#D84315',
+        fontWeight: 'bold',
+        marginBottom: '10px',
     },
     instruction: {
         color: '#BF360C',

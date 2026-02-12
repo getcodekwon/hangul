@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { GameHeader } from '../components/GameHeader';
 import confetti from 'canvas-confetti';
 import { WORDS } from '../data/wordData';
 
@@ -105,18 +106,10 @@ export function MemoryMatchScreen() {
     return (
         <div style={styles.container}>
             {/* Header */}
-            <div style={styles.header}>
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => navigate('/mode-select')}
-                    style={styles.homeButton}
-                >
-                    🏠
-                </motion.button>
-                <div style={styles.title}>
-                    단어 그림 짝꿍
-                </div>
+            <GameHeader />
+
+            <div style={styles.title}>
+                단어 그림 짝꿍
             </div>
 
             <div style={styles.grid}>
@@ -180,23 +173,14 @@ const styles = {
         fontFamily: '"Jua", sans-serif',
         position: 'relative',
     },
-    header: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '20px',
-        maxWidth: '600px',
-    },
-    homeButton: {
-        background: 'none',
-        border: 'none',
-        fontSize: '2rem',
-        cursor: 'pointer',
-    },
+    // header removed
+    // homeButton removed
     title: {
-        fontSize: '1.8rem',
+        marginTop: '50px', // Add margin for header
+        marginBottom: '20px',
+        fontSize: '2rem', // Increased size
         color: '#1565C0',
+        fontWeight: 'bold',
     },
     grid: {
         display: 'grid',
@@ -205,6 +189,8 @@ const styles = {
         width: '100%',
         maxWidth: '500px',
         aspectRatio: '3/4',
+        // Ensure grid fits in screen
+        maxHeight: 'calc(100vh - 150px)',
     },
     cardContainer: {
         perspective: '1000px',
