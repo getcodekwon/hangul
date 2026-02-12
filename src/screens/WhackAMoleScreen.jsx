@@ -21,6 +21,8 @@ export function WhackAMoleScreen() {
     // Game loop refs
     const timerRef = useRef(null);
     const moleTimerRef = useRef(null);
+    const isPlayingRef = useRef(false);
+    const targetDataRef = useRef(null);
 
     useEffect(() => {
         startGame();
@@ -29,12 +31,14 @@ export function WhackAMoleScreen() {
 
     const startGame = () => {
         setIsPlaying(true);
+        isPlayingRef.current = true;
         setScore(0);
         setTimeLeft(30);
 
         // Pick new target
         const newTarget = WORDS[Math.floor(Math.random() * WORDS.length)];
         setTargetData(newTarget);
+        targetDataRef.current = newTarget;
 
         // Start Timer
         timerRef.current = setInterval(() => {
@@ -53,25 +57,29 @@ export function WhackAMoleScreen() {
 
     const stopGame = () => {
         setIsPlaying(false);
+        isPlayingRef.current = false;
         clearInterval(timerRef.current);
         clearTimeout(moleTimerRef.current);
         setMoles(Array(9).fill({ active: false, content: '', isTarget: false }));
     };
 
     const moleLoop = () => {
-        if (!isPlaying && timeLeft <= 0) return;
+        if (!isPlayingRef.current) return;
 
         // Random delay between pops
         const delay = Math.random() * 1000 + 500; // 0.5s - 1.5s
 
         moleTimerRef.current = setTimeout(() => {
-            popUpMole();
-            moleLoop();
+            if (isPlayingRef.current) {
+                popUpMole();
+                moleLoop();
+            }
         }, delay);
     };
 
     const popUpMole = () => {
-        if (!targetData) return;
+        const currentTarget = targetDataRef.current;
+        if (!currentTarget) return;
 
         setMoles(prev => {
             const newMoles = [...prev];
@@ -89,13 +97,13 @@ export function WhackAMoleScreen() {
             let content = '';
 
             if (isTarget) {
-                content = targetData.word;
+                content = currentTarget.word;
             } else {
                 // Pick random distractor from WORDS
                 const distractor = WORDS[Math.floor(Math.random() * WORDS.length)];
                 content = distractor.word;
                 // Avoid accidental match
-                if (content === targetData.word) {
+                if (content === currentTarget.word) {
                     content = WORDS[(WORDS.indexOf(distractor) + 1) % WORDS.length].word;
                 }
             }
@@ -105,6 +113,7 @@ export function WhackAMoleScreen() {
             // Hide mole after active time
             setTimeout(() => {
                 setMoles(current => {
+                    if (!isPlayingRef.current) return current; // Don't update if game stopped
                     const updated = [...current];
                     if (updated[randomIndex]) {
                         updated[randomIndex] = { ...updated[randomIndex], active: false };
