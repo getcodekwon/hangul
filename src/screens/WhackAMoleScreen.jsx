@@ -193,13 +193,21 @@ export function WhackAMoleScreen() {
                                     onClick={() => handleMoleClick(index)}
                                     whileTap={{ scale: 0.9 }}
                                 >
-                                    <span style={{ fontSize: '1.5rem', color: '#5D4037', fontWeight: 'bold' }}>
+                                    <div style={styles.moleEarLeft}></div>
+                                    <div style={styles.moleEarRight}></div>
+                                    <span style={{ fontSize: '1.5rem', color: '#FFF', fontWeight: 'bold', zIndex: 10, textShadow: '1px 1px 0 #5D4037' }}>
                                         {mole.content}
                                     </span>
                                     <div style={styles.moleFace}>
-                                        <div style={styles.moleEye}></div>
-                                        <div style={styles.moleEye}></div>
+                                        <div style={styles.moleEye}>
+                                            <div style={styles.moleEyeSparkle}></div>
+                                        </div>
                                         <div style={styles.moleNose}></div>
+                                        <div style={styles.moleEye}>
+                                            <div style={styles.moleEyeSparkle}></div>
+                                        </div>
+                                        <div style={styles.moleCheekLeft}></div>
+                                        <div style={styles.moleCheekRight}></div>
                                     </div>
                                 </motion.div>
                             )}
@@ -331,39 +339,91 @@ const styles = {
     },
     mole: {
         position: 'absolute',
-        bottom: '15%', // Sit in the hole
+        bottom: '15%',
         width: '70%',
-        height: '70%',
-        backgroundColor: '#D7CCC8', // Mole color
-        borderRadius: '40% 40% 0 0',
+        height: '75%', // Slightly taller
+        backgroundColor: '#8D6E63', // Warm Brown
+        borderRadius: '50% 50% 15% 15%', // Rounder top
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 2,
         cursor: 'pointer',
-        boxShadow: 'inset 0 -10px 0 rgba(0,0,0,0.1)',
+        boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.2)', // Better depth
+    },
+    moleEarLeft: {
+        position: 'absolute',
+        top: '-10%',
+        left: '10%',
+        width: '25%',
+        height: '25%',
+        backgroundColor: '#8D6E63',
+        borderRadius: '50%',
+        zIndex: -1, // Behind head
+    },
+    moleEarRight: {
+        position: 'absolute',
+        top: '-10%',
+        right: '10%',
+        width: '25%',
+        height: '25%',
+        backgroundColor: '#8D6E63',
+        borderRadius: '50%',
+        zIndex: -1,
     },
     moleFace: {
-        marginTop: '5px',
+        marginTop: '2px',
+        position: 'relative',
+        width: '100%',
+        height: '40px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: '10px',
-        flexWrap: 'wrap',
     },
     moleEye: {
         width: '8px',
         height: '8px',
         backgroundColor: '#333',
         borderRadius: '50%',
+        margin: '0 8px',
+        position: 'relative',
+    },
+    moleEyeSparkle: {
+        width: '3px',
+        height: '3px',
+        backgroundColor: 'white',
+        borderRadius: '50%',
+        position: 'absolute',
+        top: '1px',
+        right: '1px',
     },
     moleNose: {
-        width: '12px',
-        height: '8px',
-        backgroundColor: '#FF7043',
+        width: '14px',
+        height: '10px',
+        backgroundColor: '#FFAB91', // Pinkish nose
+        borderRadius: '40%',
+        marginTop: '5px',
+    },
+    moleCheekLeft: {
+        position: 'absolute',
+        top: '15px',
+        left: '15%',
+        width: '10px',
+        height: '6px',
+        backgroundColor: '#FFAB91',
         borderRadius: '50%',
-        marginTop: '2px',
+        opacity: 0.6,
+    },
+    moleCheekRight: {
+        position: 'absolute',
+        top: '15px',
+        right: '15%',
+        width: '10px',
+        height: '6px',
+        backgroundColor: '#FFAB91',
+        borderRadius: '50%',
+        opacity: 0.6,
     },
     modal: {
         position: 'absolute',
